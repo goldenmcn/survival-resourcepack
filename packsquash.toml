@@ -1,0 +1,8 @@
+pack_directory = 'src'
+output_file_path = 'build/output.zip'
+
+allow_mods = ['OptiFine']
+
+zip_spec_conformance_level = 'disregard'
+size_increasing_zip_obfuscation = true
+percentage_of_zip_structures_tuned_for_obfuscation_discretion = 15
