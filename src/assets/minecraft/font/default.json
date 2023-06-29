@@ -1,77 +1,16 @@
 {
-	"providers": 
-	[
-		{
-			"type": "bitmap",
-			"file": "minecraft:font/logo.png",
-			"height": 32,
-			"ascent": 8,
-			"chars": [
-				"\u24cf"
-			]
-		},
-		{
-			"type": "bitmap",
-			"file": "minecraft:font/nothing.png",
-			"height": 1,
-			"ascent": 1,
-			"chars": [
-				"\u24c4"
-			]
-		},
-		{
-			"type": "bitmap",
-			"file": "minecraft:font/nothing.png",
-			"height": 1,
-			"ascent": 1,
-			"chars": [
-				"\u24c9"
-			]
-		},
-		{
-			"type": "bitmap",
-			"file": "minecraft:font/nothing.png",
-			"height": 1,
-			"ascent": 1,
-			"chars": [
-				"\u24c1"
-			]
-		},
-		{
-			"type": "bitmap",
-			"file": "minecraft:font/admin.png",
-			"height": 8,
-			"ascent": 8,
-			"chars": [
-				"\u24b6"
-			]
-		},
-		{
-			"type": "bitmap",
-			"file": "minecraft:font/founder.png",
-			"height": 8,
-			"ascent": 8,
-			"chars": [
-				"\u24bb"
-			]
-		},
-		{
-			"type": "bitmap",
-			"file": "minecraft:font/moderator.png",
-			"height": 8,
-			"ascent": 8,
-			"chars": [
-				"\u24c2"
-			]
-		},
-		{
-			"type": "bitmap",
-			"file": "minecraft:font/sponsor.png",
-			"height": 8,
-			"ascent": 8,
-			"chars": [
-				"\u24c8"
-			]
-		}
-	]
+  "providers": [
+    {
+      "type": "bitmap",
+      "file": "goldenmc:icons/chat.png",
+      "ascent": 8,
+      "chars": ["\uE000\uE001\uE002\uE003\uE004\uE005"]
+    },
+    {
+      "type": "bitmap",
+      "file": "goldenmc:icons/group.png",
+      "ascent": 7,
+      "chars": ["\uE100\uE101\uE102"]
+    }
+  ]
 }
