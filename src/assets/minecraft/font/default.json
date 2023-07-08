@@ -3,13 +3,13 @@
     {
       "type": "bitmap",
       "file": "goldenmc:icons/chat.png",
-      "ascent": 8,
+      "ascent": 7,
       "chars": ["\uE000\uE001\uE002\uE003\uE004\uE005\uE006\uE007\uE008\uE009\uE010\uE011"]
     },
     {
       "type": "bitmap",
       "file": "goldenmc:icons/chat.png",
-      "ascent": 8,
+      "ascent": 7,
       "chars": ["🍖⛏◎☆☠⏳✎🛡⸘✉☄⌚"] 
     },
     {
