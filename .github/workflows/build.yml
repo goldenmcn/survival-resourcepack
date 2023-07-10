@@ -10,73 +10,76 @@ jobs:
             artifact: ${{ steps.info.outputs.artifact }}
         steps:
         - name: Clone repository
-            uses: actions/checkout@v3
+          uses: actions/checkout@v3
 
         - name: Download tombl
-            uses: robinraju/release-downloader@v1.8
-            with:
-                repository: snyball/tombl
-                fileName: '*.tar.gz'
-                latest: true
+          uses: robinraju/release-downloader@v1.8
+          with:
+            repository: snyball/tombl
+            fileName: '*.tar.gz'
+            latest: true
 
         - name: Install tombl
-            run: |
-                mkdir bin
-                tar -zxvf tombl-*.tar.gz -C bin/
-                readonly tombl=$(find bin/ -type f -executable -print -quit)
-                echo "$(dirname $tombl)" >> $GITHUB_PATH
+          run: |
+            mkdir bin
+            tar -zxvf tombl-*.tar.gz -C bin/
+            readonly tombl=$(find bin/ -type f -executable -print -quit)
+            echo "$(dirname $tombl)" >> $GITHUB_PATH
+        
         - name: Prepare environments
-            id: info
-            run: |
-                eval "$(tombl -e name=name pack.toml)"
-                echo "name=$name" >> $GITHUB_OUTPUT
+          id: info
+          run: |
+            eval "$(tombl -e name=name pack.toml)"
+            echo "name=$name" >> $GITHUB_OUTPUT
 
-                eval "$(tombl -e version=version pack.toml)"
-                echo "version=$version" >> $GITHUB_OUTPUT
+            eval "$(tombl -e version=version pack.toml)"
+            echo "version=$version" >> $GITHUB_OUTPUT
 
-                sha=`echo $GITHUB_SHA | cut -c 1-7`
-                echo "sha=$sha" >> $GITHUB_OUTPUT
+            sha=`echo $GITHUB_SHA | cut -c 1-7`
+            echo "sha=$sha" >> $GITHUB_OUTPUT
 
-                package=${name}-${version}-rev.${sha}
-                echo "package=$package" >> $GITHUB_OUTPUT
+            package=${name}-${version}-rev.${sha}
+            echo "package=$package" >> $GITHUB_OUTPUT
 
-                mkdir build
-                eval "$(tombl -e output=output_file_path packsquash.toml)"
-                echo "output=$output" >> $GITHUB_OUTPUT
+            mkdir build
+            eval "$(tombl -e output=output_file_path packsquash.toml)"
+            echo "output=$output" >> $GITHUB_OUTPUT
 
-                artifact="${name} v${version}"
-                echo "artifact=$artifact" >> $GITHUB_OUTPUT
+            artifact="${name} v${version}"
+            echo "artifact=$artifact" >> $GITHUB_OUTPUT
+        
         - name: Make Optimized Pack
-            uses: ComunidadAylas/PackSquash-action@master
-            with:
-                token: ${{ secrets.GITHUB_TOKEN }}
-                options: packsquash.toml
-                packsquash_version: latest
+          uses: ComunidadAylas/PackSquash-action@master
+          with:
+            token: ${{ secrets.GITHUB_TOKEN }}
+            options: packsquash.toml
+            packsquash_version: latest
 
         - uses: geekyeggo/delete-artifact@v2
-            with:
-                name: Optimized pack
+          with:
+            name: Optimized pack
 
         - name: Rename Optimized Pack
-            run: mv ${{ steps.info.outputs.output }} "${{ steps.info.outputs.package }}.zip"
+          run: mv ${{ steps.info.outputs.output }} "${{ steps.info.outputs.package }}.zip"
 
         - uses: actions/upload-artifact@v3
-            with:
-                name: ${{ steps.info.outputs.artifact }}
-                path: ${{ steps.info.outputs.package }}.zip
+          with:
+            name: ${{ steps.info.outputs.artifact }}
+            path: ${{ steps.info.outputs.package }}.zip
     publish:
         runs-on: ubuntu-latest
         needs: [build]
         if: startsWith(github.event.ref, 'refs/tags/v')
         steps:
         - name: Download artifact
-            id: download
-            uses: actions/download-artifact@v3
-            with:
-                name: ${{ needs.build.outputs.artifact }}
+          id: download
+          uses: actions/download-artifact@v3
+          with:
+            name: ${{ needs.build.outputs.artifact }}
+
         - name: Discord Publish
-            uses: tsickert/discord-webhook@v5.3.0
-            with:
-                webhook-url: ${{ secrets.DISCORD_WEBHOOK_URL }}
-                content: "${{ needs.build.outputs.name }} v${{ needs.build.outputs.version }}"
-                filename: "${{ steps.download.outputs.download-path }}/${{ needs.build.outputs.package }}.zip"
+          uses: tsickert/discord-webhook@v5.3.0
+          with:
+            webhook-url: ${{ secrets.DISCORD_WEBHOOK_URL }}
+            content: "${{ needs.build.outputs.name }} v${{ needs.build.outputs.version }}"
+            filename: "${{ steps.download.outputs.download-path }}/${{ needs.build.outputs.package }}.zip"
