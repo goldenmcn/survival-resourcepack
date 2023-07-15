@@ -85,7 +85,7 @@ jobs:
             ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
         - name: Publish to resource server
-          run: rsync -avz --status=progress ${{ steps.download.outputs.download-path }}/${{ needs.build.outputs.package }}.zip ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.SSH_DIST }}
+          run: rsync -avz ${{ steps.download.outputs.download-path }}/${{ needs.build.outputs.package }}.zip ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.SSH_DIST }}
 
         - name: Discord Publish
           uses: tsickert/discord-webhook@v5.3.0
