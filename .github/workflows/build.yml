@@ -84,6 +84,9 @@ jobs:
           with:
             ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
+        - name: Adding Known Hosts
+          run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+
         - name: Publish to resource server
           run: rsync -avz ${{ steps.download.outputs.download-path }}/${{ needs.build.outputs.package }}.zip ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.SSH_DIST }}
 
