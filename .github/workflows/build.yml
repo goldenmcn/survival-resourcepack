@@ -10,12 +10,12 @@ jobs:
             artifact: ${{ steps.info.outputs.artifact }}
         steps:
         - name: Clone repository
-          uses: actions/checkout@v3
+          uses: actions/checkout@v4
           with:
             fetch-depth: 0
 
         - name: Download tombl
-          uses: robinraju/release-downloader@v1.8
+          uses: robinraju/release-downloader@v1.9
           with:
             repository: snyball/tombl
             fileName: '*.tar.gz'
@@ -57,30 +57,50 @@ jobs:
             options: packsquash.toml
             packsquash_version: latest
 
-        - uses: geekyeggo/delete-artifact@v2
+        - uses: geekyeggo/delete-artifact@v5
           with:
             name: Optimized pack
 
         - name: Rename Optimized Pack
           run: mv ${{ steps.info.outputs.output }} "${{ steps.info.outputs.package }}.zip"
 
-        - uses: actions/upload-artifact@v3
+        - uses: actions/upload-artifact@v4
           with:
             name: ${{ steps.info.outputs.artifact }}
             path: ${{ steps.info.outputs.package }}.zip
-    publish:
+    publish-github:
+      runs-on: ubuntu-latest
+      needs: [build]
+      if: startsWith(github.event.ref, 'refs/tags/v')
+      steps:
+      - name: Download artifact
+        id: download
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ needs.build.outputs.artifact }}
+      - name: Rename artifact
+        run: mv ${{ steps.download.outputs.download-path }}/${{ needs.build.outputs.package }}.zip ${{ needs.build.outputs.name }}.zip
+      - name: Create release
+        uses: softprops/action-gh-release@v2.0.4
+        with:
+          draft: true
+          name: "${{ needs.build.outputs.name }} v${{ needs.build.outputs.version }}"
+          files: ${{ needs.build.outputs.name }}.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    publish-ssh:
         runs-on: ubuntu-latest
         needs: [build]
-        if: startsWith(github.event.ref, 'refs/tags/v')
+        if: startsWith(github.event.ref, 'refs/tags/v') && false
         steps:
         - name: Download artifact
           id: download
-          uses: actions/download-artifact@v3
+          uses: actions/download-artifact@v4
           with:
             name: ${{ needs.build.outputs.artifact }}
 
         - name: Install SSH Agent
-          uses: webfactory/ssh-agent@v0.7.0
+          uses: webfactory/ssh-agent@v0.9.0
           with:
             ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
@@ -89,7 +109,16 @@ jobs:
 
         - name: Publish to resource server
           run: rsync -avz ${{ steps.download.outputs.download-path }}/${{ needs.build.outputs.package }}.zip ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.SSH_DIST }}
-
+    publish-discord:
+        runs-on: ubuntu-latest
+        needs: [build]
+        if: startsWith(github.event.ref, 'refs/tags/v')
+        steps:
+        - name: Download artifact
+          id: download
+          uses: actions/download-artifact@v4
+          with:
+            name: ${{ needs.build.outputs.artifact }}
         - name: Discord Publish
           uses: tsickert/discord-webhook@v5.3.0
           with:
