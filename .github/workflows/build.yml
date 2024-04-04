@@ -1,78 +1,80 @@
-name: 'Build Resource Pack'
+name: "Build Resource Pack"
 on: [push]
 jobs:
-    build:
-        runs-on: ubuntu-latest
-        outputs:
-            name: ${{ steps.info.outputs.name }}
-            version: ${{ steps.info.outputs.version }}
-            package: ${{ steps.info.outputs.package }}
-            artifact: ${{ steps.info.outputs.artifact }}
-        steps:
-        - name: Clone repository
-          uses: actions/checkout@v4
-          with:
-            fetch-depth: 0
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      name: ${{ steps.info.outputs.name }}
+      version: ${{ steps.info.outputs.version }}
+      package: ${{ steps.info.outputs.package }}
+      artifact: ${{ steps.info.outputs.artifact }}
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-        - name: Download tombl
-          uses: robinraju/release-downloader@v1.9
-          with:
-            repository: snyball/tombl
-            fileName: '*.tar.gz'
-            latest: true
+      - name: Download tombl
+        uses: robinraju/release-downloader@v1.9
+        with:
+          repository: snyball/tombl
+          fileName: "*.tar.gz"
+          latest: true
 
-        - name: Install tombl
-          run: |
-            mkdir bin
-            tar -zxvf tombl-*.tar.gz -C bin/
-            readonly tombl=$(find bin/ -type f -executable -print -quit)
-            echo "$(dirname $tombl)" >> $GITHUB_PATH
-        
-        - name: Prepare environments
-          id: info
-          run: |
-            eval "$(tombl -e name=name pack.toml)"
-            echo "name=$name" >> $GITHUB_OUTPUT
+      - name: Install tombl
+        run: |
+          mkdir bin
+          tar -zxvf tombl-*.tar.gz -C bin/
+          readonly tombl=$(find bin/ -type f -executable -print -quit)
+          echo "$(dirname $tombl)" >> $GITHUB_PATH
 
-            eval "$(tombl -e version=version pack.toml)"
-            echo "version=$version" >> $GITHUB_OUTPUT
+      - name: Prepare environments
+        id: info
+        run: |
+          eval "$(tombl -e name=name pack.toml)"
+          echo "name=$name" >> $GITHUB_OUTPUT
 
-            sha=`echo $GITHUB_SHA | cut -c 1-7`
-            echo "sha=$sha" >> $GITHUB_OUTPUT
+          eval "$(tombl -e version=version pack.toml)"
+          echo "version=$version" >> $GITHUB_OUTPUT
 
-            package=${name}-${version}-rev.${sha}
-            echo "package=$package" >> $GITHUB_OUTPUT
+          sha=`echo $GITHUB_SHA | cut -c 1-7`
+          echo "sha=$sha" >> $GITHUB_OUTPUT
 
-            mkdir build
-            eval "$(tombl -e output=output_file_path packsquash.toml)"
-            echo "output=$output" >> $GITHUB_OUTPUT
+          package=${name}-${version}-rev.${sha}
+          echo "package=$package" >> $GITHUB_OUTPUT
 
-            artifact="${name} v${version}"
-            echo "artifact=$artifact" >> $GITHUB_OUTPUT
-        
-        - name: Make Optimized Pack
-          uses: ComunidadAylas/PackSquash-action@master
-          with:
-            token: ${{ secrets.GITHUB_TOKEN }}
-            options: packsquash.toml
-            packsquash_version: latest
+          mkdir build
+          eval "$(tombl -e output=output_file_path packsquash.toml)"
+          echo "output=$output" >> $GITHUB_OUTPUT
 
-        - uses: geekyeggo/delete-artifact@v5
-          with:
-            name: Optimized pack
+          artifact="${name} v${version}"
+          echo "artifact=$artifact" >> $GITHUB_OUTPUT
 
-        - name: Rename Optimized Pack
-          run: mv ${{ steps.info.outputs.output }} "${{ steps.info.outputs.package }}.zip"
+      - name: Make Optimized Pack
+        uses: ComunidadAylas/PackSquash-action@master
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          options: packsquash.toml
+          packsquash_version: latest
 
-        - uses: actions/upload-artifact@v4
-          with:
-            name: ${{ steps.info.outputs.artifact }}
-            path: ${{ steps.info.outputs.package }}.zip
-    publish-github:
-      runs-on: ubuntu-latest
-      needs: [build]
-      if: startsWith(github.event.ref, 'refs/tags/v')
-      steps:
+      - uses: geekyeggo/delete-artifact@v5
+        with:
+          name: Optimized pack
+
+      - name: Rename Optimized Pack
+        run: mv ${{ steps.info.outputs.output }} "${{ steps.info.outputs.package }}.zip"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.info.outputs.artifact }}
+          path: ${{ steps.info.outputs.package }}.zip
+  publish-github:
+    runs-on: ubuntu-latest
+    needs: [build]
+    permissions:
+      contents: write
+    if: startsWith(github.event.ref, 'refs/tags/v')
+    steps:
       - name: Download artifact
         id: download
         uses: actions/download-artifact@v4
@@ -88,40 +90,40 @@ jobs:
           files: ${{ needs.build.outputs.name }}.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    publish-ssh:
-        runs-on: ubuntu-latest
-        needs: [build]
-        if: startsWith(github.event.ref, 'refs/tags/v') && false
-        steps:
-        - name: Download artifact
-          id: download
-          uses: actions/download-artifact@v4
-          with:
-            name: ${{ needs.build.outputs.artifact }}
+  publish-ssh:
+    runs-on: ubuntu-latest
+    needs: [build]
+    if: startsWith(github.event.ref, 'refs/tags/v') && false
+    steps:
+      - name: Download artifact
+        id: download
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ needs.build.outputs.artifact }}
 
-        - name: Install SSH Agent
-          uses: webfactory/ssh-agent@v0.9.0
-          with:
-            ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: Install SSH Agent
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-        - name: Adding Known Hosts
-          run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+      - name: Adding Known Hosts
+        run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
-        - name: Publish to resource server
-          run: rsync -avz ${{ steps.download.outputs.download-path }}/${{ needs.build.outputs.package }}.zip ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.SSH_DIST }}
-    publish-discord:
-        runs-on: ubuntu-latest
-        needs: [build]
-        if: startsWith(github.event.ref, 'refs/tags/v')
-        steps:
-        - name: Download artifact
-          id: download
-          uses: actions/download-artifact@v4
-          with:
-            name: ${{ needs.build.outputs.artifact }}
-        - name: Discord Publish
-          uses: tsickert/discord-webhook@v5.3.0
-          with:
-            webhook-url: ${{ secrets.DISCORD_WEBHOOK_URL }}
-            content: "${{ needs.build.outputs.name }} v${{ needs.build.outputs.version }}"
-            filename: "${{ steps.download.outputs.download-path }}/${{ needs.build.outputs.package }}.zip"
+      - name: Publish to resource server
+        run: rsync -avz ${{ steps.download.outputs.download-path }}/${{ needs.build.outputs.package }}.zip ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.SSH_DIST }}
+  publish-discord:
+    runs-on: ubuntu-latest
+    needs: [build]
+    if: startsWith(github.event.ref, 'refs/tags/v')
+    steps:
+      - name: Download artifact
+        id: download
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ needs.build.outputs.artifact }}
+      - name: Discord Publish
+        uses: tsickert/discord-webhook@v5.3.0
+        with:
+          webhook-url: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          content: "${{ needs.build.outputs.name }} v${{ needs.build.outputs.version }}"
+          filename: "${{ steps.download.outputs.download-path }}/${{ needs.build.outputs.package }}.zip"
