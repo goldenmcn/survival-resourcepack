@@ -1,0 +1,11 @@
+{
+  "gui.owo": {
+    "sounds": [
+      {
+        "name": "goldenmc:gui/owo",
+        "volume": 0.55
+      }
+    ],
+    "subtitle": "goldenmc:subtitles.gui.owo"
+  }
+}
