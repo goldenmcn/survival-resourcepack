@@ -5,7 +5,8 @@
       "file": "goldenmc:icons/chat.png",
       "ascent": 7,
       "chars": [
-        "\uE000\uE001\uE002\uE003\uE004\uE005\uE006\uE007\uE008\uE009\uE010\uE011"
+        "\uE000\uE001\uE002\uE003\uE004\uE005\uE006\uE007\uE008\uE009\uE010\uE011",
+        "\uE012\uE013\uE014\uE015\uE016\uE017\uE018\uE019\uE020\uE021\uE022\uE023"
       ]
     },
     {
@@ -13,7 +14,8 @@
       "file": "goldenmc:icons/chat.png",
       "ascent": 7,
       "chars": [
-        "🍖⛏◎☆☠⏳✎🛡⸘✉☄⌚"
+        "◇🍖◎☆☠\uF000✎🛡⸘✉☄⌚",
+        "⏳☷🧪\uF003\uF004\uF005\uF006\uF007\uF008\uF009\uF010\uF011"
       ]
     },
     {
@@ -54,7 +56,7 @@
       "type": "bitmap",
       "file": "goldenmc:gui/logo.png",
       "ascent": 32,
-      "height": 42,
+      "height": 48,
       "chars": [
         "\uE200"
       ]
