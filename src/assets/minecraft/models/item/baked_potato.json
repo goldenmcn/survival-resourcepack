@@ -1,0 +1,20 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "minecraft:item/baked_potato"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "custom_model_data": 320002
+      },
+      "model": "goldenmc:item/bag_of_potatoes"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 320010
+      },
+      "model": "goldenmc:item/golden_potato"
+    }
+  ]
+}
