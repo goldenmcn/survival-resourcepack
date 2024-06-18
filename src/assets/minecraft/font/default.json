@@ -22,44 +22,34 @@
       "type": "bitmap",
       "file": "goldenmc:icons/group.png",
       "ascent": 7,
-      "chars": [
-        "\uE100\uE101\uE102\uE103\uE104"
-      ]
+      "chars": ["\uE100\uE101\uE102\uE103\uE104\uE105"]
     },
     {
       "type": "bitmap",
       "file": "goldenmc:icons/group.png",
       "ascent": 7,
-      "chars": [
-        "🔱🗡🔥🎣⭐"
-      ]
+      "chars": ["🔱🗡🔥🎣⭐☀"]
     },
     {
       "type": "bitmap",
       "file": "goldenmc:gui/menu_plate.png",
       "ascent": -8,
       "height": 32,
-      "chars": [
-        "\uE500"
-      ]
+      "chars": ["\uE500"]
     },
     {
       "type": "bitmap",
       "file": "goldenmc:gui/logo.png",
       "ascent": 32,
       "height": 52,
-      "chars": [
-        "\uE501"
-      ]
+      "chars": ["\uE501"]
     },
     {
       "type": "bitmap",
       "file": "goldenmc:gui/logo.png",
       "ascent": 32,
       "height": 48,
-      "chars": [
-        "\uE200"
-      ]
+      "chars": ["\uE200"]
     },
     {
       "type": "space",
