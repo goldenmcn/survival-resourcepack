@@ -52,6 +52,20 @@
       "chars": ["\uE200"]
     },
     {
+      "type": "bitmap",
+      "file": "goldenmc:gui/everlasting_logo.png",
+      "ascent": 32,
+      "height": 48,
+      "chars": ["\uE201"]
+    },
+    {
+      "type": "bitmap",
+      "file": "goldenmc:gui/evergreen_logo.png",
+      "ascent": 32,
+      "height": 48,
+      "chars": ["\uE202"]
+    },
+    {
       "type": "space",
       "advances": {
         "󏾊": -118,
