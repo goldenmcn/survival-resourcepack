@@ -1,6 +1,7 @@
 {
   "pack": {
-    "pack_format": 34,
-    "description": "GoldenMC Resource Pack"
+    "description": "GoldenMC Resource Pack",
+    "pack_format": 46,
+    "supported_formats": [36, 46]
   }
 }
