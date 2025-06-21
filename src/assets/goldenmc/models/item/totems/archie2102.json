@@ -1,0 +1,9 @@
+{
+	"parent": "item/generated",
+	"textures":
+    {
+		"layer0": "goldenmc:item/totems/archie2102"
+	},
+	"gui_light": "front",
+	"display": {}
+}

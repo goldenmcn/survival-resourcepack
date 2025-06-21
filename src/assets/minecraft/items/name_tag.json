@@ -1,0 +1,27 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:component",
+    "component": "minecraft:custom_name",
+    "cases": [
+      {
+        "when": "Harvel",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/statues/statue_harvelsx"
+        }
+      },
+      {
+        "when": "Barsi-chan",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/statues/statue_barsi-chan"
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "minecraft:item/name_tag"
+    }
+  }
+}

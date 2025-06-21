@@ -1,0 +1,624 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "model": "",
+    "tints": [],
+    "property": "minecraft:component",
+    "component": "minecraft:custom_name",
+    "cases": [
+      {
+        "when": "Kwallom",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/kwallom"
+        }
+      },
+      {
+        "when": "_KARASb_",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/_karasb_"
+        }
+      },
+      {
+        "when": "_Mar0n_",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/_mar0n_"
+        }
+      },
+      {
+        "when": "_Volterr",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/_volterr"
+        }
+      },
+      {
+        "when": "15_andre_",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/15_andre"
+        }
+      },
+      {
+        "when": "aka_n",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/aka_n"
+        }
+      },
+      {
+        "when": "Archie2102",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/archie2102"
+        }
+      },
+      {
+        "when": "Armadiada",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/armadiada"
+        }
+      },
+      {
+        "when": "BarsiG",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/barsig"
+        }
+      },
+      {
+        "when": "bend9r_",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/bender"
+        }
+      },
+      {
+        "when": "Bluykas",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/bluykas"
+        }
+      },
+      {
+        "when": "Bunny_Kate",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/bunny_kate"
+        }
+      },
+      {
+        "when": "Buraishin",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/buraishin"
+        }
+      },
+      {
+        "when": "Cap_chik",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/cap_chik"
+        }
+      },
+      {
+        "when": "Crynoshka",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/crynoshka"
+        }
+      },
+      {
+        "when": "CTAC_HE_CTAC",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/ctac_he_ctac"
+        }
+      },
+      {
+        "when": "Dark_Vol",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/dark_vol"
+        }
+      },
+      {
+        "when": "DrD4niel_",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/drdeniel"
+        }
+      },
+      {
+        "when": "egg0r",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/egg0r"
+        }
+      },
+      {
+        "when": "eitvee",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/eitvee"
+        }
+      },
+      {
+        "when": "Ennord",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/ennord"
+        }
+      },
+      {
+        "when": "fair_grom",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/fair_grom"
+        }
+      },
+      {
+        "when": "Feymat",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/feymat"
+        }
+      },
+      {
+        "when": "fluffy4ka",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/fluffy4ka"
+        }
+      },
+      {
+        "when": "_IFoxyK_",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/foxyk"
+        }
+      },
+      {
+        "when": "Glower4ek",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/gloverchk"
+        }
+      },
+      {
+        "when": "Harvel",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/harvelsx"
+        }
+      },
+      {
+        "when": "Hassium_",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/hassium"
+        }
+      },
+      {
+        "when": "hleb5174",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/hleb5174"
+        }
+      },
+      {
+        "when": "icraft2010",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/icraft2010"
+        }
+      },
+      {
+        "when": "idk_vin",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/idk_vin"
+        }
+      },
+      {
+        "when": "MRI1dosYT",
+        "model": {
+          "type": "minecraft:model",
+          "model":"goldenmc:item/totems/ivandos"
+        }
+      },
+      {
+        "when": "JsPiviliam",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/js"
+        }
+      },
+      {
+        "when": "Kapustochka",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/kapustka"
+        }
+      },
+      {
+        "when": "karuseel23",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/karuseel23"
+        }
+      },
+      {
+        "when": "KoZimAk",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/kozimak"
+        }
+      },
+      {
+        "when": "Ktotori",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/ktotori"
+        }
+      },
+      {
+        "when": "kW1st",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/kwist"
+        }
+      },
+      {
+        "when": "L_E_G",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/l_e_g"
+        }
+      },
+      {
+        "when": "LanceKnight7",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/lanceknight7"
+        }
+      },
+      {
+        "when": "Limoro_",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/limoro_"
+        }
+      },
+      {
+        "when": "LPSoverG",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/lpsoverg"
+        }
+      },
+      {
+        "when": "Endarium",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/lycifershados"
+        }
+      },
+      {
+        "when": "MerLant_",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/merlant"
+        }
+      },
+      {
+        "when": "MineRubi",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/minerubi"
+        }
+      },
+      {
+        "when": "Miumiaf",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/miumiaf"
+        }
+      },
+      {
+        "when": "MrArmyCats",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/mrarmycats"
+        }
+      },
+      {
+        "when": "MrReshma",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/mrreshma"
+        }
+      },
+      {
+        "when": "Nastya4acki",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/nastya4acki"
+        }
+      },
+      {
+        "when": "_Noobile_",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/noobile"
+        }
+      },
+      {
+        "when": "oliv_o4kun",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/oliv_o4kun"
+        }
+      },
+      {
+        "when": "oompaloompa",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/oompaloompa"
+        }
+      },
+      {
+        "when": "OTTER_MONICA",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/otter_monica"
+        }
+      },
+      {
+        "when": "paIIItetic",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/paiiitetic"
+        }
+      },
+      {
+        "when": "Panda_XLX",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/pandaxlx"
+        }
+      },
+      {
+        "when": "praporka__",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/praporka__"
+        }
+      },
+      {
+        "when": "ProstoPavel",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/prostopavel"
+        }
+      },
+      {
+        "when": "provodo4ik",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/provodo41k"
+        }
+      },
+      {
+        "when": "Ques_s",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/ques_s"
+        }
+      },
+      {
+        "when": "Raydden",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/raydden"
+        }
+      },
+      {
+        "when": "RayPuppy",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/raypopigai"
+        }
+      },
+      {
+        "when": "r3yjell",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/reyjell"
+        }
+      },
+      {
+        "when": "ro_3e",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/ro_3e"
+        }
+      },
+      {
+        "when": "Rodyaon",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/rodyaon"
+        }
+      },
+      {
+        "when": "Romik_HD",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/romik_hd"
+        }
+      },
+      {
+        "when": "sajlam",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/sajlam"
+        }
+      },
+      {
+        "when": "Selento",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/selento"
+        }
+      },
+      {
+        "when": "SeniorPeepo",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/seniorpeepo"
+        }
+      },
+      {
+        "when": "Sh_ama_N",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/sh_ama_n"
+        }
+      },
+      {
+        "when": "Shikanoko-icraft2010",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/shikanoko-icraft"
+        }
+      },
+      {
+        "when": "Smeill_",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/smeill_"
+        }
+      },
+      {
+        "when": "Stakan28",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/stakan28"
+        }
+      },
+      {
+        "when": "Stalkerror",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/stalkerror"
+        }
+      },
+      {
+        "when": "stepteps",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/stepteps"
+        }
+      },
+      {
+        "when": "Subar1k",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/subar1k"
+        }
+      },
+      {
+        "when": "sunwave919",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/sunwave"
+        }
+      },
+      {
+        "when": "SweetSp0t",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/sweetsp0t"
+        }
+      },
+      {
+        "when": "Tea_Djem",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/tea_djem"
+        }
+      },
+      {
+        "when": "TreeAdept",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/treeadept"
+        }
+      },
+      {
+        "when": "understarsz",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/understarsz"
+        }
+      },
+      {
+        "when": "vedmo4ka",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/vedmo4ka"
+        }
+      },
+      {
+        "when": "vokali",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/vokali"
+        }
+      },
+      {
+        "when": "wentyy123",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/wentyy123"
+        }
+      },
+      {
+        "when": "worobeyyy",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/worobeyyy"
+        }
+      },
+      {
+        "when": "yourdilemma00",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/yourdilemma00"
+        }
+      },
+      {
+        "when": "z17m4n",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/z17m4n"
+        }
+      },
+      {
+        "when": "zapah_kota_0w0",
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:item/totems/zapah_kota_0w0"
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "minecraft:item/totem_of_undying"
+    }
+  }
+}
