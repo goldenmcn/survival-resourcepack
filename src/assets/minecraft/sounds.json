@@ -1,0 +1,35 @@
+{
+  
+  
+  "music.dragon": {
+    "sounds": [
+      {
+        "name": "music/game/end/boss",
+        "replace": true,
+        "weight": 10000000,
+        "stream": true,
+        "volume": 0.5
+        
+      }
+    ]
+  },
+  "music.dragon_ambience": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/end/boss",
+        "weight": 10000000,
+        "stream": true
+         
+      }
+    ]
+  },
+  "entity.ender_dragon.death": {
+    "sounds": [
+      {
+      "name": "mob/enderdragon/end",
+        "volume": 0.5
+      }
+    ],
+    "subtitle": "subtitles.entity.ender_dragon.death"
+  }
+}
