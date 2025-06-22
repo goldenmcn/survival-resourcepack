@@ -114,7 +114,7 @@ jobs:
   publish-discord:
     runs-on: ubuntu-latest
     needs: [build]
-    if: startsWith(github.event.ref, 'refs/tags/v')
+    if: startsWith(github.event.ref, 'refs/tags/v') && false
     steps:
       - name: Download artifact
         id: download
