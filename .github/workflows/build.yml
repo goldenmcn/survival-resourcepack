@@ -67,7 +67,7 @@ jobs:
 
       - uses: geekyeggo/delete-artifact@v5
         with:
-          name: Optimized pack
+          name: Optimized pack.zip
 
       - name: Rename Optimized Pack
         run: mv ${{ steps.info.outputs.output }} "${{ steps.info.outputs.package }}.zip"
