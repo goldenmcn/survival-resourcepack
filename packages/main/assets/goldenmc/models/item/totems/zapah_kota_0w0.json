@@ -1,0 +1,9 @@
+{
+	"parent": "item/generated",
+	"textures":
+    {
+		"layer0": "goldenmc:item/totems/zapah_kota_0w0"
+	},
+	"gui_light": "front",
+	"display": {}
+}

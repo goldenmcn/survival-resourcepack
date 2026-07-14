@@ -1,5 +1,5 @@
 pack_directory = 'src'
-output_file_path = 'build/zoloto.zip'
+output_file_path = 'build/zolotomc.zip'
 
 allow_mods = ['OptiFine']
 

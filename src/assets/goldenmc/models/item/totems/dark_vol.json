@@ -1,9 +1,0 @@
-{
-	"parent": "item/generated",
-	"textures":
-    {
-		"layer0": "goldenmc:item/totems/dark_vol"
-	},
-	"gui_light": "front",
-	"display": {}
-}

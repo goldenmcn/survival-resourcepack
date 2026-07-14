@@ -1,9 +1,0 @@
-{
-	"parent": "item/generated",
-	"textures":
-    {
-		"layer0": "goldenmc:item/totems/sh_ama_n"
-	},
-	"gui_light": "front",
-	"display": {}
-}

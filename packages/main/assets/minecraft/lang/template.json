@@ -1,0 +1,4 @@
+{
+  "menu.game": "\uE501",
+  "menu.disconnect": "󏾛\uE500󏾛󏿞{{ get_translation('menu.disconnect') }}󏿞"
+}

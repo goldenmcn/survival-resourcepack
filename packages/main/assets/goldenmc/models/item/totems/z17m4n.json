@@ -1,0 +1,9 @@
+{
+	"parent": "item/generated",
+	"textures":
+    {
+		"layer0": "goldenmc:item/totems/z17m4n"
+	},
+	"gui_light": "front",
+	"display": {}
+}

@@ -14,6 +14,11 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Setup Pixi
+        uses: prefix-dev/setup-pixi@v0.8.1
+        with:
+          pixi-version: v0.39.2
+
       - name: Download tombl
         uses: robinraju/release-downloader@v1.9
         with:
@@ -50,11 +55,14 @@ jobs:
           artifact="${name} v${version}"
           echo "artifact=$artifact" >> $GITHUB_OUTPUT
 
+      - name: Prepare build workspace
+        run: pixi run python build.py --prepare
+
       - name: Make Optimized Pack
         uses: ComunidadAylas/PackSquash-action@master
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          options: packsquash.toml
+          options: build/temp_packsquash.toml
           packsquash_version: latest
 
       - uses: geekyeggo/delete-artifact@v5

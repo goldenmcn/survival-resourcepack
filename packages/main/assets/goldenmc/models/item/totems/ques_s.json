@@ -1,0 +1,9 @@
+{
+	"parent": "item/generated",
+	"textures":
+    {
+		"layer0": "goldenmc:item/totems/ques_s"
+	},
+	"gui_light": "front",
+	"display": {}
+}
