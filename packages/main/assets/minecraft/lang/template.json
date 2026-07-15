@@ -1,4 +1,4 @@
 {
-  "menu.game": "\uE501",
-  "menu.disconnect": "󏾛\uE500󏾛󏿞{{ get_translation('menu.disconnect') }}󏿞"
+  "menu.game": "{{ icons.logo.char }}",
+  "menu.disconnect": "{{ center_icon('menu_plate') }}{{ center(get_translation('menu.disconnect')) }}"
 }

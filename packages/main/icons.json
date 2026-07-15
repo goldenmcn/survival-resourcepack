@@ -1,0 +1,63 @@
+{
+  "chat_icons": {
+    "file": "goldenmc:icons/chat.png",
+    "ascent": 7,
+    "chars": [
+      "\uE000\uE001\uE002\uE003\uE004\uE005\uE006\uE007\uE008\uE009\uE010\uE011",
+      "\uE012\uE013\uE014\uE015\uE016\uE017\uE018\uE019\uE020\uE021\uE022\uE023"
+    ]
+  },
+  "chat_icons_2": {
+    "file": "goldenmc:icons/chat.png",
+    "ascent": 7,
+    "chars": [
+      "◇🍖◎☆☠\uF000✎🛡⸘✉☄⌚",
+      "⏳☷🧪\uF003\uF004\uF005\uF006\uF007\uF008\uF009\uF010\uF011"
+    ]
+  },
+  "group_icons": {
+    "file": "goldenmc:icons/group.png",
+    "ascent": 7,
+    "chars": [
+      "\uE100\uE101\uE102\uE103\uE104\uE105"
+    ]
+  },
+  "group_icons_2": {
+    "file": "goldenmc:icons/group.png",
+    "ascent": 7,
+    "chars": [
+      "🔱🗡🔥🎣⭐☀"
+    ]
+  },
+  "menu_plate": {
+    "char": "\uE500",
+    "width": 202,
+    "file": "goldenmc:gui/menu_plate.png",
+    "ascent": -8,
+    "height": 32
+  },
+  "logo": {
+    "char": "\uE501",
+    "file": "goldenmc:gui/logo.png",
+    "ascent": 32,
+    "height": 52
+  },
+  "logo_small": {
+    "char": "\uE200",
+    "file": "goldenmc:gui/logo.png",
+    "ascent": 32,
+    "height": 48
+  },
+  "everlasting_logo": {
+    "char": "\uE201",
+    "file": "goldenmc:gui/everlasting_logo.png",
+    "ascent": 32,
+    "height": 48
+  },
+  "evergreen_logo": {
+    "char": "\uE202",
+    "file": "goldenmc:gui/evergreen_logo.png",
+    "ascent": 32,
+    "height": 48
+  }
+}

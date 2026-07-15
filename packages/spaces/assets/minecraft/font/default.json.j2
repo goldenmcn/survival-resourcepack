@@ -1,0 +1,12 @@
+{
+  "providers": [
+    {
+      "type": "space",
+      "advances": {
+        {%- for advance, char in spaces.items() %}
+        "{{ char }}": {{ advance }}{% if not loop.last %},{% endif %}
+        {%- endfor %}
+      }
+    }
+  ]
+}

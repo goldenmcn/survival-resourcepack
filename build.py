@@ -91,7 +91,7 @@ def discover_sources() -> List[Path]:
         else:
             # The src directory contains multiple resource pack subdirectories
             for item in SRC_DIR.iterdir():
-                if is_resource_pack(item):
+                if item.is_dir() or is_resource_pack(item):
                     src_packs.append(item)
             src_packs.sort(key=lambda p: p.name.lower())
     sources.extend(src_packs)
