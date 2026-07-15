@@ -1,0 +1,14 @@
+{
+  "exclusions": [
+    "pack.png",
+    "pack.mcmeta",
+    "LICENSE.txt",
+    "pack.txt",
+    "/art",
+    "/terrain",
+    "/assets/ad_astra",
+    "/assets/astrocraft",
+    "/assets/galacticraftcore",
+    "/assets/stellarview"
+  ]
+}

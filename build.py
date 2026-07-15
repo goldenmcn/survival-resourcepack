@@ -179,12 +179,72 @@ def merge_packs(sources: List[Path]) -> None:
 
     temp_unzip_dir = BUILD_DIR / "temp_unzip"
 
+    import fnmatch
+
+    def get_ignore_func(src_root_dir: Path, exclusions: List[str]):
+        all_exclusions = list(exclusions) if exclusions else []
+        # Always ignore common OS garbage files
+        all_exclusions.extend([".DS_Store", "__MACOSX", "Thumbs.db", "desktop.ini"])
+        
+        def ignore_func(dir_path: str, names: List[str]) -> List[str]:
+            ignored = []
+            rel_dir = os.path.relpath(dir_path, src_root_dir).replace("\\", "/")
+            if rel_dir == ".":
+                rel_dir = ""
+            
+            for name in names:
+                rel_path = f"{rel_dir}/{name}" if rel_dir else name
+                
+                for ex in all_exclusions:
+                    ex = ex.replace("\\", "/")
+                    
+                    # Remove trailing slash as we don't strictly differentiate dirs/files here
+                    if ex.endswith("/"):
+                        ex = ex[:-1]
+                        
+                    match_from_root = False
+                    if ex.startswith("/"):
+                        ex = ex[1:]
+                        match_from_root = True
+                        
+                    # If there's a slash anywhere, it must be evaluated from the root of the pack
+                    if "/" in ex:
+                        match_from_root = True
+                        
+                    if match_from_root:
+                        if fnmatch.fnmatch(rel_path, ex):
+                            ignored.append(name)
+                            break
+                    else:
+                        # Matches anywhere in the tree (e.g. "*.txt", "__MACOSX")
+                        if fnmatch.fnmatch(name, ex):
+                            ignored.append(name)
+                            break
+                            
+            return ignored
+        return ignore_func
+
     logger.info("Merging resource packs into workspace...")
     for source in sources:
         logger.info(f" -> Applying: {source.relative_to(PROJECT_ROOT)}")
+        
+        pack_exclusions = []
+        config_path = source.with_suffix(".json")
+        if config_path.exists():
+            try:
+                with open(config_path, "r", encoding="utf-8") as f:
+                    config = json.load(f)
+                    if isinstance(config, list):
+                        pack_exclusions = config
+                    elif isinstance(config, dict):
+                        pack_exclusions = config.get("exclusions", [])
+            except Exception as e:
+                logger.error(f"Failed to load {config_path.name}: {e}")
+                
         if source.is_dir():
             shutil.copytree(
-                source, TEMP_WORKSPACE, dirs_exist_ok=True, copy_function=smart_copy
+                source, TEMP_WORKSPACE, dirs_exist_ok=True, copy_function=smart_copy,
+                ignore=get_ignore_func(source, pack_exclusions)
             )
         elif source.is_file() and source.suffix.lower() == ".zip":
             if temp_unzip_dir.exists():
@@ -197,6 +257,7 @@ def merge_packs(sources: List[Path]) -> None:
                 TEMP_WORKSPACE,
                 dirs_exist_ok=True,
                 copy_function=smart_copy,
+                ignore=get_ignore_func(temp_unzip_dir, pack_exclusions)
             )
 
     if temp_unzip_dir.exists():
