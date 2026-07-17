@@ -116,25 +116,24 @@ def merge_json_files(src: str, dst: str) -> bool:
         with open(src, "r", encoding="utf-8") as f:
             src_data: Any = json.load(f)
 
-        path_parts = Path(dst).parts
+        def deep_merge(d: Any, s: Any) -> Any:
+            if isinstance(d, dict) and isinstance(s, dict):
+                for key, value in s.items():
+                    if key in d:
+                        d[key] = deep_merge(d[key], value)
+                    else:
+                        d[key] = value
+                return d
+            elif isinstance(d, list) and isinstance(s, list):
+                for item in s:
+                    if item not in d:
+                        d.append(item)
+                return d
+            else:
+                return s
 
-        # Merge fonts (providers array)
-        if (
-            "font" in path_parts
-            and isinstance(dest_data, dict)
-            and "providers" in dest_data
-            and "providers" in src_data
-        ):
-            dest_data["providers"].extend(src_data["providers"])
-
-        # Merge dicts (lang, sounds.json, etc.)
-        elif isinstance(dest_data, dict) and isinstance(src_data, dict):
-            dest_data.update(src_data)
-
-        # Merge arrays (e.g. some tags)
-        elif isinstance(dest_data, list) and isinstance(src_data, list):
-            dest_data.extend(src_data)
-
+        if isinstance(dest_data, (dict, list)) and isinstance(src_data, (dict, list)):
+            dest_data = deep_merge(dest_data, src_data)
         else:
             return False  # Overwrite normally
 
