@@ -353,11 +353,64 @@ def cleanup() -> None:
         TEMP_PACKSQUASH_CONFIG.unlink()
 
 
+def output_info() -> None:
+    """Read configuration files and write to GITHUB_OUTPUT."""
+    import tomllib
+
+    # Read pack.toml
+    pack_toml_path = PROJECT_ROOT / "pack.toml"
+    with open(pack_toml_path, "rb") as f:
+        pack_data = tomllib.load(f)
+    name = pack_data.get("name", "")
+    version = pack_data.get("version", "")
+
+    # Read packsquash.toml
+    packsquash_toml_path = PROJECT_ROOT / "packsquash.toml"
+    with open(packsquash_toml_path, "rb") as f:
+        packsquash_data = tomllib.load(f)
+    output = packsquash_data.get("output_file_path", "")
+
+    # Get Git SHA
+    sha = os.environ.get("GITHUB_SHA", "")
+    if sha:
+        sha = sha[:7]
+    else:
+        try:
+            sha = subprocess.check_output(["git", "rev-parse", "--short", "HEAD"]).decode().strip()
+        except Exception:
+            sha = "unknown"
+
+    package = f"{name}-{version}-rev.{sha}"
+    artifact = f"{name} v${version}" if "$" in version else f"{name} v{version}"
+
+    github_output = os.environ.get("GITHUB_OUTPUT")
+    if github_output:
+        with open(github_output, "a", encoding="utf-8") as f:
+            f.write(f"name={name}\n")
+            f.write(f"version={version}\n")
+            f.write(f"sha={sha}\n")
+            f.write(f"package={package}\n")
+            f.write(f"output={output}\n")
+            f.write(f"artifact={artifact}\n")
+    else:
+        print(f"name={name}")
+        print(f"version={version}")
+        print(f"sha={sha}")
+        print(f"package={package}")
+        print(f"output={output}")
+        print(f"artifact={artifact}")
+
+
 def main() -> None:
     """Main execution function for the build script."""
     parser = argparse.ArgumentParser(description="Survival Resourcepack Build Script")
     parser.add_argument("--prepare", action="store_true", help="Prepare workspace without running PackSquash")
+    parser.add_argument("--info", action="store_true", help="Output pack information to GITHUB_OUTPUT")
     args = parser.parse_args()
+
+    if args.info:
+        output_info()
+        return
 
     logger.info("Initializing resource pack build process.")
     sources = discover_sources()

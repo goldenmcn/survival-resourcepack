@@ -21,25 +21,7 @@ jobs:
 
       - name: Prepare environments
         id: info
-        run: |
-          name=$(pixi run python -c "import tomllib; print(tomllib.load(open('pack.toml', 'rb'))['name'])")
-          echo "name=$name" >> $GITHUB_OUTPUT
-
-          version=$(pixi run python -c "import tomllib; print(tomllib.load(open('pack.toml', 'rb'))['version'])")
-          echo "version=$version" >> $GITHUB_OUTPUT
-
-          sha=$(echo $GITHUB_SHA | cut -c 1-7)
-          echo "sha=$sha" >> $GITHUB_OUTPUT
-
-          package="${name}-${version}-rev.${sha}"
-          echo "package=$package" >> $GITHUB_OUTPUT
-
-          mkdir -p build
-          output=$(pixi run python -c "import tomllib; print(tomllib.load(open('packsquash.toml', 'rb'))['output_file_path'])")
-          echo "output=$output" >> $GITHUB_OUTPUT
-
-          artifact="${name} v${version}"
-          echo "artifact=$artifact" >> $GITHUB_OUTPUT
+        run: pixi run python build.py --info
 
       - name: Prepare build workspace
         run: pixi run python build.py --prepare
