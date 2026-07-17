@@ -19,37 +19,23 @@ jobs:
         with:
           pixi-version: v0.39.2
 
-      - name: Download tombl
-        uses: robinraju/release-downloader@v1.9
-        with:
-          repository: snyball/tombl
-          fileName: "*.tar.gz"
-          latest: true
-
-      - name: Install tombl
-        run: |
-          mkdir bin
-          tar -zxvf tombl-*.tar.gz -C bin/
-          readonly tombl=$(find bin/ -type f -executable -print -quit)
-          echo "$(dirname $tombl)" >> $GITHUB_PATH
-
       - name: Prepare environments
         id: info
         run: |
-          eval "$(tombl -e name=name pack.toml)"
+          name=$(pixi run python -c "import tomllib; print(tomllib.load(open('pack.toml', 'rb'))['name'])")
           echo "name=$name" >> $GITHUB_OUTPUT
 
-          eval "$(tombl -e version=version pack.toml)"
+          version=$(pixi run python -c "import tomllib; print(tomllib.load(open('pack.toml', 'rb'))['version'])")
           echo "version=$version" >> $GITHUB_OUTPUT
 
-          sha=`echo $GITHUB_SHA | cut -c 1-7`
+          sha=$(echo $GITHUB_SHA | cut -c 1-7)
           echo "sha=$sha" >> $GITHUB_OUTPUT
 
-          package=${name}-${version}-rev.${sha}
+          package="${name}-${version}-rev.${sha}"
           echo "package=$package" >> $GITHUB_OUTPUT
 
-          mkdir build
-          eval "$(tombl -e output=output_file_path packsquash.toml)"
+          mkdir -p build
+          output=$(pixi run python -c "import tomllib; print(tomllib.load(open('packsquash.toml', 'rb'))['output_file_path'])")
           echo "output=$output" >> $GITHUB_OUTPUT
 
           artifact="${name} v${version}"
@@ -59,7 +45,7 @@ jobs:
         run: pixi run python build.py --prepare
 
       - name: Make Optimized Pack
-        uses: ComunidadAylas/PackSquash-action@master
+        uses: ComunidadAylas/PackSquash-action@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           options: build/temp_packsquash.toml
@@ -122,7 +108,7 @@ jobs:
   publish-discord:
     runs-on: ubuntu-latest
     needs: [build]
-    if: startsWith(github.event.ref, 'refs/tags/v') && false
+    if: startsWith(github.event.ref, 'refs/tags/v')
     steps:
       - name: Download artifact
         id: download
@@ -130,8 +116,9 @@ jobs:
         with:
           name: ${{ needs.build.outputs.artifact }}
       - name: Discord Publish
-        uses: tsickert/discord-webhook@v5.3.0
+        uses: tsickert/discord-webhook@v6.0.0
         with:
           webhook-url: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          content: "${{ needs.build.outputs.name }} v${{ needs.build.outputs.version }}"
+          thread-name: ${{ secrets.DISCORD_THREAD_NAME }}
+          content: "Доступна новая версия: **${{ needs.build.outputs.name }} v${{ needs.build.outputs.version }}**"
           filename: "${{ steps.download.outputs.download-path }}/${{ needs.build.outputs.package }}.zip"
