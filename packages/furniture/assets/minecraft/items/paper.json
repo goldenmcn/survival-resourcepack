@@ -1,0 +1,20 @@
+{
+  "model": {
+    "type": "minecraft:range_dispatch",
+    "model": "minecraft:item/paper",
+    "property": "minecraft:custom_model_data",
+    "entries": [
+      {
+        "threshold": 1001,
+        "model": {
+          "type": "minecraft:model",
+          "model": "goldenmc:block/furniture/chair/cherry_1"
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "minecraft:item/paper"
+    }
+  }
+}

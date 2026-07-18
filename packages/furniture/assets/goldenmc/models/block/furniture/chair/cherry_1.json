@@ -1,0 +1,8 @@
+{
+  "parent": "goldenmc:block/furniture/template/chair",
+  "textures": {
+    "bottom": "goldenmc:block/chair/bottom/cherry",
+    "seat": "goldenmc:block/chair/seat/cherry",
+    "back": "goldenmc:block/chair/back_1/cherry"
+  }
+}
