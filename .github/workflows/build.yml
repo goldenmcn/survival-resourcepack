@@ -114,11 +114,11 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: ${{ needs.build.outputs.artifact }}
-      - name: Upload to Google Drive
-        uses: adityak74/google-drive-upload-git-action@main
-        with:
-          credentials: ${{ secrets.GDRIVE_CREDENTIALS }}
-          folderId: ${{ secrets.GDRIVE_FOLDER_ID }}
-          filename: "${{ steps.download.outputs.download-path }}/${{ needs.build.outputs.package }}.zip"
-          name: "${{ needs.build.outputs.name }}.zip"
-          overwrite: "true"
+      - name: Install Rclone
+        run: sudo apt-get update && sudo apt-get install -y rclone
+      - name: Upload to Google Drive via Rclone
+        env:
+          RCLONE_CONFIG_MYDRIVE_TYPE: drive
+          RCLONE_CONFIG_MYDRIVE_TOKEN: ${{ secrets.RCLONE_GDRIVE_TOKEN }}
+        run: |
+          rclone copy "${{ steps.download.outputs.download-path }}/${{ needs.build.outputs.package }}.zip" "mydrive:" --drive-root-folder-id="${{ secrets.GDRIVE_FOLDER_ID }}"
