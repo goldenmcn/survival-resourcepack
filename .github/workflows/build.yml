@@ -121,4 +121,5 @@ jobs:
           RCLONE_CONFIG_MYDRIVE_TYPE: drive
           RCLONE_CONFIG_MYDRIVE_TOKEN: ${{ secrets.RCLONE_GDRIVE_TOKEN }}
         run: |
-          rclone copy "${{ steps.download.outputs.download-path }}/${{ needs.build.outputs.package }}.zip" "mydrive:" --drive-root-folder-id="${{ secrets.GDRIVE_FOLDER_ID }}"
+          rclone copyto "${{ steps.download.outputs.download-path }}/${{ needs.build.outputs.package }}.zip" "mydrive:${{ needs.build.outputs.name }}.zip" --drive-root-folder-id="${{ secrets.GDRIVE_FOLDER_ID }}"
+
