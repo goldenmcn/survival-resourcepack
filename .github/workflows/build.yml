@@ -69,7 +69,7 @@ jobs:
   publish-ssh:
     runs-on: ubuntu-latest
     needs: [build]
-    if: startsWith(github.event.ref, 'refs/tags/v') && false
+    if: startsWith(github.event.ref, 'refs/tags/v')
     steps:
       - name: Download artifact
         id: download
@@ -77,16 +77,21 @@ jobs:
         with:
           name: ${{ needs.build.outputs.artifact }}
 
-      - name: Install SSH Agent
-        uses: webfactory/ssh-agent@v0.9.0
+      - name: Prepare upload files
+        run: |
+          cp "${{ steps.download.outputs.download-path }}/${{ needs.build.outputs.package }}.zip" "${{ steps.download.outputs.download-path }}/${{ needs.build.outputs.name }}.zip"
+
+      - name: Deploy to Server via SFTP
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.6
         with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-      - name: Adding Known Hosts
-        run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
-
-      - name: Publish to resource server
-        run: rsync -avz ${{ steps.download.outputs.download-path }}/${{ needs.build.outputs.package }}.zip ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.SSH_DIST }}
+          username: ${{ secrets.SFTP_USER || secrets.SSH_USER }}
+          server: ${{ secrets.SFTP_HOST || secrets.SSH_HOST }}
+          port: ${{ secrets.SFTP_PORT || secrets.SSH_PORT || 2222 }}
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY || secrets.SFTP_KEY }}
+          password: ${{ secrets.SFTP_PASSWORD || secrets.SSH_PASSWORD }}
+          local_path: '${{ steps.download.outputs.download-path }}/*'
+          remote_path: ${{ secrets.SFTP_REMOTE_DIR || secrets.SSH_DIST || '/web' }}
+          sftp_only: true
   publish-discord:
     runs-on: ubuntu-latest
     needs: [build]
