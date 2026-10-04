@@ -81,17 +81,31 @@ jobs:
         run: |
           cp "${{ steps.download.outputs.download-path }}/${{ needs.build.outputs.package }}.zip" "${{ steps.download.outputs.download-path }}/${{ needs.build.outputs.name }}.zip"
 
-      - name: Deploy to Server via SFTP
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.6
+      - name: Deploy Resource Pack to Server Shared Storage via SCP
+        uses: appleboy/scp-action@v0.1.7
         with:
-          username: ${{ secrets.SFTP_USER || secrets.SSH_USER }}
-          server: ${{ secrets.SFTP_HOST || secrets.SSH_HOST }}
-          port: ${{ secrets.SFTP_PORT || secrets.SSH_PORT || 2222 }}
-          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY || secrets.SFTP_KEY }}
-          password: ${{ secrets.SFTP_PASSWORD || secrets.SSH_PASSWORD }}
-          local_path: '${{ steps.download.outputs.download-path }}/*'
-          remote_path: ${{ secrets.SFTP_REMOTE_DIR || secrets.SSH_DIST || '/web' }}
-          sftp_only: true
+          host: ${{ secrets.SSH_HOST || secrets.SFTP_HOST }}
+          username: ${{ secrets.SSH_USER || secrets.SFTP_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY || secrets.SFTP_KEY }}
+          password: ${{ secrets.SSH_PASSWORD || secrets.SFTP_PASSWORD }}
+          port: ${{ secrets.SSH_PORT || secrets.SFTP_PORT || 22 }}
+          source: '${{ steps.download.outputs.download-path }}/*.zip'
+          target: '${{ secrets.SSH_DIST || secrets.SFTP_REMOTE_DIR || '/web' }}/shared'
+          strip_components: 1
+
+      - name: Update active symlink in website
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST || secrets.SFTP_HOST }}
+          username: ${{ secrets.SSH_USER || secrets.SFTP_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY || secrets.SFTP_KEY }}
+          password: ${{ secrets.SSH_PASSWORD || secrets.SFTP_PASSWORD }}
+          port: ${{ secrets.SSH_PORT || secrets.SFTP_PORT || 22 }}
+          script: |
+            DEPLOY_PATH="${{ secrets.SSH_DIST || secrets.SFTP_REMOTE_DIR || '/web' }}"
+            if [ -d "$DEPLOY_PATH/current" ] && [ -f "$DEPLOY_PATH/shared/zolotomc.zip" ]; then
+              ln -sf "$DEPLOY_PATH/shared/zolotomc.zip" "$DEPLOY_PATH/current/zolotomc.zip"
+            fi
   publish-discord:
     runs-on: ubuntu-latest
     needs: [build]
