@@ -17,16 +17,18 @@
   },
   "group_icons": {
     "file": "goldenmc:icons/group.png",
+    "height": 8,
     "ascent": 7,
     "chars": [
-      "\uE100\uE101\uE102\uE103\uE104\uE105"
+      "\uE100\uE101\uE102\uE103\uE104\uE105\uE106"
     ]
   },
   "group_icons_2": {
     "file": "goldenmc:icons/group.png",
+    "height": 8,
     "ascent": 7,
     "chars": [
-      "🔱🗡🔥🎣⭐☀"
+      "🔱🗡🔥🎣⭐☀✦"
     ]
   },
   "menu_plate": {
